@@ -24,8 +24,6 @@ services:
       - "8181:8181"    
     depends_on:
       - mysql
-    volumes:
-      - ./clienteMicroServicio/src/main/resources/application-docker.properties:/app/application-docker.properties
     environment:
       SPRING_PROFILES_ACTIVE: docker
 
@@ -39,8 +37,5 @@ services:
       - "8282:8282"
     depends_on:
       - mysql
-      
-    volumes:
-      - ./cuentaMicroServicio/src/main/resources/application-docker.properties:/app/application-docker.properties
     environment:
       SPRING_PROFILES_ACTIVE: docker
