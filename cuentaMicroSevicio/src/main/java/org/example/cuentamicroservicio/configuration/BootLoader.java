@@ -21,72 +21,11 @@ import java.util.HashMap;
 
 @SpringBootApplication(scanBasePackages = "org.example.cuentamicroservicio.*")
 
-@EnableJpaRepositories(basePackages = "org.example.cuentamicroservicio"/*,
-        entityManagerFactoryRef = "userEntityManager",
-        transactionManagerRef = "userTransactionManager"*/)
+@EnableJpaRepositories(basePackages = "org.example.cuentamicroservicio")
 @EntityScan(basePackages = "org.example.cuentamicroservicio.model")
 public class BootLoader {
-   /* public BootLoader(environment environment) {
-        this.environment = environment;
-    }*/
-
-/*
-    @Autowired
-    private Environment env;
-*/
 
     public static void main(String[] args) {
         SpringApplication.run(BootLoader.class, args);
     }
-/*
-    @Bean
-    @Primary
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSourceProperties dataSourceProperties() {
-        return new DataSourceProperties();
-    }
-
-    @Bean
-    @Primary
-    public LocalContainerEntityManagerFactoryBean userEntityManager() {
-        LocalContainerEntityManagerFactoryBean em
-                = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(userDataSource());
-        em.setPackagesToScan("org.example.cuentamicroservicio.model");
-
-        HibernateJpaVendorAdapter vendorAdapter
-                = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        HashMap<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto",
-                env.getProperty("hibernate.hbm2ddl.auto"));
-        properties.put("hibernate.dialect",
-                env.getProperty("hibernate.dialect"));
-        em.setJpaPropertyMap(properties);
-
-        return em;
-    }
-
-    @Primary
-    @Bean
-    public DataSource userDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
-        dataSource.setUrl(env.getProperty("spring.datasource.url"));
-        dataSource.setUsername(env.getProperty("spring.datasource.username"));
-        dataSource.setPassword(env.getProperty("spring.datasource.password"));
-
-        return dataSource;
-    }
-
-    @Primary
-    @Bean
-    public PlatformTransactionManager userTransactionManager() {
-
-        JpaTransactionManager transactionManager
-                = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(
-                userEntityManager().getObject());
-        return transactionManager;
-    }*/
 }
