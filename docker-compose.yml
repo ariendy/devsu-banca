@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0.28
+    container_name: mysql-standalone
+    restart: always
+    ports:
+      - "3309:3309"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: banca
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: banca
+      MYSQL_TCP_PORT: 3309
+
+  cliente-sevice:
+    image: cliente_service_image
+    container_name: cliente_container
+    build:
+      context: ./clienteMicroServicio
+      dockerfile: Dockerfile
+    ports:
+      - "8181:8181"    
+    depends_on:
+      - mysql
+    volumes:
+      - ./clienteMicroServicio/src/main/resources/application-docker.properties:/app/application-docker.properties
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+  cuenta-service:
+    image: cuenta_service_image
+    container_name: cuenta_container
+    build:
+      context: ./cuentaMicroSevicio
+      dockerfile: Dockerfile
+    ports:
+      - "8282:8282"
+    depends_on:
+      - mysql
+      
+    volumes:
+      - ./cuentaMicroServicio/src/main/resources/application-docker.properties:/app/application-docker.properties
+    environment:
+      SPRING_PROFILES_ACTIVE: docker

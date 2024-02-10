@@ -1,0 +1,47 @@
+<div class="container mt-5">
+  <form *ngIf="form" [formGroup]="form" class="form">
+    <div class="row mb-3">
+      <div class="col-2"><label>Número de Cuenta: </label></div>
+      <div class="col">
+        <input type="text" formControlName="numeroCuenta" id="numero-cuenta" size="20" maxlength="20"/>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-2"><label>Tipo Cuenta: </label></div>
+      <div class="col">
+        <select formControlName="tipoCuenta" id="tipo-cuenta">
+          <option value="Ahorro">Ahorro</option>
+          <option value="Corriente">Corriente</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-2"><label>Cliente: </label></div>
+      <div class="col">
+        <select formControlName="personaId" id="cliente">
+          <option *ngFor="let usuario of clientes" value="{{usuario.personaId}}">{{ usuario.nombre }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-2"><label>Saldo: </label></div>
+      <div class="col">
+        <input type="text" formControlName="saldoInicial" id="saldo-inicial"/>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-2"><label>Estado: </label></div>
+      <div class="col">
+        <input type="checkbox" formControlName="estado" id="estado"/>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-primary me-2" (click)="guardarCuenta()">Guardar</button>
+    <button type="button" class="btn btn-secondary me-2" (click)="goBackToCuentas()">Cancelar</button>
+    <button type="button" class="btn btn-danger" *ngIf="id" (click)="deleteCuenta()">Eliminar</button>
+  </form>
+</div>

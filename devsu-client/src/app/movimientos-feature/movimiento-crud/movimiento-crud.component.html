@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <form *ngIf="form" [formGroup]="form" class="form">
+    <div class="row mb-3">
+      <div class="col-2"><label>Número de Cuenta: </label></div>
+      <div class="col">
+        <select formControlName="cuentaId" id="numero-cuenta">
+          <option *ngFor="let cuenta of cuentas" value="{{cuenta.cuentaId}}">{{ cuenta.cliente }}
+            - {{ cuenta.numeroCuenta }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="id">
+      <div class="col-2"><label>Fecha: </label></div>
+      <div class="col">
+        <label>{{ selectedMovimiento?.fecha | date: 'dd/MM/yyyy' }} </label>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-2"><label>Monto: </label></div>
+      <div class="col">
+        <input type="text" formControlName="valor" id="valor"/>
+      </div>
+    </div>
+
+    <div class="row mb-3" *ngIf="id">
+      <div class="col-2"><label>Saldo Disponible: </label></div>
+      <div class="col">
+        <label>{{ selectedMovimiento?.saldo | currency }} </label>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-primary me-2"  (click)="guardarMovimiento()">Guardar</button>
+    <button type="button" class="btn btn-secondary me-2" (click)="goBackToMovimientos()">Cancelar</button>
+    <button type="button" class="btn btn-danger" *ngIf="id" (click)="deleteMovimiento()">Eliminar</button>
+
+  </form>
+</div>

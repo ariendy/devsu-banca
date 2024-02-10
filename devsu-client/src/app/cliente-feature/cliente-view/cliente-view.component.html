@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h1> Clientes</h1>
+  <div  class="my-3">
+    <input type="text" id="cliente" [(ngModel)]="clientToSearch" placeholder="Buscar" (input)="onSearchValue($event)"/>
+    <button type="button" id="nuevo-usuario" routerLink="./add" class="btn btn-primary ms-2 float-end">Nuevo</button>
+  </div>
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col" >Nombre</th>
+      <th scope="col">Dirección</th>
+      <th scope="col">Teléfono</th>
+      <th scope="col">Contraseña</th>
+      <th scope="col">Estado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let usuario of displayedClientes">
+    <tr routerLink="./{{usuario.personaId}}/edit" class="cursor-pointer">
+      <td>{{ usuario.nombre }}</td>
+      <td>{{ usuario.direccion }}</td>
+      <td>{{ usuario.telefono }}</td>
+      <td>{{ usuario.contrasenia }}</td>
+      <td ><input type="checkbox" checked="{{ usuario.estado }}" disabled/></td>
+    </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>

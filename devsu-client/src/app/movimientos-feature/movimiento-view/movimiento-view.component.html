@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h1>Movimientos</h1>
+  <div class="my-3">
+    <input type="text" id="movimiento" [(ngModel)]="movimientoToSearch" placeholder="Buscar"
+           (input)="onSearchValue($event)"/>
+    <button type="button" id="nuevo-movimiento" routerLink="./add" class=" btn btn-primary ms-2 float-end">Nuevo</button>
+  </div>
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Número de Cuenta</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Saldo Disponible</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let movimiento of displayedMovimientos">
+      <tr routerLink="./{{movimiento.movimientoId}}/edit" class="cursor-pointer">
+        <td>{{ movimiento.fecha | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ movimiento.cliente }}</td>
+        <td>{{ movimiento.numeroCuenta }}</td>
+        <td>{{ movimiento.valor | currency }}</td>
+        <td>{{ movimiento.saldo | currency }}</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
